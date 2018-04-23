@@ -16,11 +16,13 @@ def main(args):
             continue
 
         for day in os.listdir(monthdir):
+            print("Day", day)
             daydir = os.path.join(monthdir, day)
             if not os.path.isdir(daydir):
                 continue
 
             for hour in os.listdir(daydir):
+                print("Hour", hour)
                 hourdir = os.path.join(daydir, hour)
                 if not os.path.isdir(hourdir):
                     continue
@@ -34,6 +36,9 @@ def main(args):
                     ext = filename.split('.')[-1]
                     if ext == 'bz2':
                         cat.append(os.path.join(hourdir, filename))
+
+                if len(cat) == 1:
+                    continue
 
                 with open(outpath, 'w') as f:
                     call(cat, stdout=f)

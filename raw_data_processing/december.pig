@@ -18,6 +18,6 @@ hashtag_groups = FOREACH hashtag_grouping GENERATE group AS id, hashtags.hashtag
 
 tweet_hashtags = JOIN details BY id LEFT OUTER, hashtag_groups BY id USING 'replicated' PARALLEL 4;
 
-stripped_tweets = FOREACH tweet_hashtags GENERATE details::id AS id, details::uid AS uid, details::user_desc AS user_desc, details::user_followers AS user_followers, details::user_friends AS user_friends, details::user_favorited AS user_favorited, details::user_status_count AS user_status_count, details::user_tz AS user_tz, details::created_ts AS created_ts, details::text AS text, hashtag_groups::hashtags AS hashtags;
+stripped_tweets = FOREACH tweet_hashtags GENERATE details::id AS id, details::uid AS uid, details::user_followers AS user_followers, details::user_friends AS user_friends, details::user_favorited AS user_favorited, details::user_status_count AS user_status_count, details::user_tz AS user_tz, details::created_ts AS created_ts, details::user_desc AS user_desc, details::text AS text, hashtag_groups::hashtags AS hashtags;
 
-STORE stripped_tweets INTO '/processed/december.txt' USING PigStorage(';');
+STORE stripped_tweets INTO '/processed/december.txt' USING PigStorage('\\x0B', '-schema');
