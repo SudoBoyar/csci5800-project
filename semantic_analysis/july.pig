@@ -3,7 +3,7 @@ dictionary = LOAD '/AFINN.txt' USING PigStorage('\t') AS(word:chararray,rating:i
 tweets = LOAD '/processed/july/*.txt' USING PigStorage('\\x0B', '-schema');
 
 flat_tweets = FOREACH tweets GENERATE id, FLATTEN(TOKENIZE(REPLACE(LOWER(TRIM(text)), '[\\p{Punct},\\p{Cntrl}]',''))) AS word;
-flat_user_desc = FOREACH tweets GENERATE id, FLATTEN(TOKENIZE(REPLACE(LOWER(TRIM(text)), '[\\p{Punct},\\p{Cntrl}]',''))) AS word;
+flat_user_desc = FOREACH tweets GENERATE id, FLATTEN(TOKENIZE(REPLACE(LOWER(TRIM(user_desc)), '[\\p{Punct},\\p{Cntrl}]',''))) AS word;
 
 tweets_no_text = FOREACH tweets GENERATE id, uid, user_followers, user_friends, user_favorited, user_status_count, user_tz, created_ts, hashtags;
 
@@ -26,4 +26,4 @@ result = FOREACH joined GENERATE joined_tweets::tweets_no_text::id AS id, joined
 
 wellformed = FILTER result BY id MATCHES '\\d{18}';
 
-STORE wellformed INTO '/analyzed/july' USING PigStorage(';');
+STORE wellformed INTO '/analyzed/july' USING PigStorage(';', '-schema');
