@@ -25,3 +25,13 @@ Data we produced.
 
 * regions.csv: A list of regions for the US.
 * timezone_region.csv: A mapping of timezones to their corresponding geographic regions.
+
+Data files needed:
+
+Full Data Source:
+https://archive.org/details/twitterstream?and%5B%5D=year%3A%222017%22&sort=-date
+Sample Data:
+https://drive.google.com/open?id=1UM3uvfqYD7d2ZrDYbZCbcXf_-5jW-uy_
+
+Data for ComparativeAnalyzer.ipynb:
+https://drive.google.com/open?id=16ZR01kVv3w8JTI8oJ-aPUs2L4JMNPgPx
